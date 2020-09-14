@@ -6,7 +6,7 @@ You can reference my answers for your assignments but don't copy the code litera
 
 ### Week 0 - Scratch
 - Pset 0
-  - Scratch
+  - [hobbit-hole](https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Scratch")
 
 ### Week 1 - C
 - Pset 1
