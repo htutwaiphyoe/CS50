@@ -23,34 +23,35 @@ You can reference my answers for your assignments but don't copy the code litera
 
 ### Week 3 - Algorithms
 - Pset 3
-  - Plurality
-  - Runoff
+  - [Plurality](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%203%20-%20Algorithm "Plurality")
+  - [Runoff](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%203%20-%20Algorithm "Runoff")
 
 ### Week 4 - Memory
 - Pset 4
-  - Filter (less)
-  - Recover
+  - [Filter (less)](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/filter(less) "Filter (less)")
+  - [Recover](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/recover "Recover")
+
 
 ### Week 5 - Data Structures
 - Pset 5
-  - Speller
+  - [Speller](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%205%20-%20Data%20Structure/speller "Speller")
 
 ### Week 6 - Python
 - Pset 6
-  - Hello
-  - Mario (more)
-  - Credit
-  - Readability
-  - DNA
+  - [Hello](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/hello "Hello")
+  - [Mario (more)](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/mario/more "Mario (more)")
+  - [Readability](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/readability "Readability")
+  - [Cash](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/cash "Cash")
+  - [DNA](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/dna "DNA")
 
 ### Week 7 - SQL
 - Pset 7
-  - Movies
-  - Houses
+  - [Movies](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%207%20-%20SQL/movies "Movies")
+  - [Houses](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%207%20-%20SQL/houses "Houses")
 
 ### Week - 8 Information
 - Pset 8 (Web)
-  - Finance
+  - [Finance](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%208%20-%20Information/finance "Finance")
 
 ### Final Project
 - IYO
