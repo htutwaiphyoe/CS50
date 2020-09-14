@@ -10,11 +10,11 @@ You can reference my answers for your assignments but don't copy the code litera
 
 ### Week 1 - C
 - Pset 1
-  - Hello
-  - Mario (less)
-  - Mario (more)
-  - Cash
-  - Credit
+  - [Hello](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%201%20-%20C "Hello")
+  - [Mario (less)](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%201%20-%20C "Mario (less)")
+  - [Mario (more)](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%201%20-%20C "Mario (more)")
+  - [Cash](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%201%20-%20C "Cash")
+  - [Credit](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%201%20-%20C "Credit")
 
 ### Week 2 - Arrays
 - Pset 2
