@@ -1,16 +1,12 @@
-# CS50
+# CS50 - Introduction to Computer Science
 
-## Introduction to Computer Science
+## Here is my Journey for CS50x 2020
 
-### Here is my Journey
-
-#### Week 0 - Scratch
-
+### Week 0 - Scratch
 - Pset 0
   - Scratch
 
-#### Week 1 - C
-
+### Week 1 - C
 - Pset 1
   - Hello
   - Mario (less)
@@ -18,31 +14,26 @@
   - Cash
   - Credit
 
-#### Week 2 - Arrays
-
+### Week 2 - Arrays
 - Pset 2
   - Readability
   - Caesar
 
-#### Week 3 - Algorithms
-
+### Week 3 - Algorithms
 - Pset 3
   - Plurality
   - Runoff
 
-#### Week 4 - Memory
-
+### Week 4 - Memory
 - Pset 4
   - Filter (less)
   - Recover
 
-#### Week 5 - Data Structures
-
+### Week 5 - Data Structures
 - Pset 5
   - Speller
 
-#### Week 6 - Python
-
+### Week 6 - Python
 - Pset 6
   - Hello
   - Mario (more)
@@ -50,21 +41,17 @@
   - Readability
   - DNA
 
-#### Week 7 - SQL
-
+### Week 7 - SQL
 - Pset 7
   - Movies
   - Houses
 
-#### Week - 8 Information
-
+### Week - 8 Information
 - Pset 8 (Web)
   - Finance
 
-#### Final Project
-
+### Final Project
 - IYO
 
-### Certificate
-
+## Certificate
 ![Certificate](Certificate.png)
