@@ -1,7 +1,7 @@
 # CS50 - Introduction to Computer Science
 
 ## Here is my Journey for CS50x 2020
-### DISCLAIMER
+### WARNING
 You can reference my answers for your assignments but don't copy the code literally without effort to solve the problems. 
 
 ### Week 0 - Scratch
