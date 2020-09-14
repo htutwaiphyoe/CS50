@@ -1,9 +1,9 @@
 # CS50 - Introduction to Computer Science
 
-## Here is my Journey for CS50x 2020
 ### WARNING
 You can reference my answers for your assignments but don't copy the code literally without effort to solve the problems. 
 
+## Here is my Journey for CS50x 2020
 ### Week 0 - Scratch
 - Pset 0
   - [Scratch](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%200%20-%20Scratch "Scratch")
