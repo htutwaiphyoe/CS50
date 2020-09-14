@@ -6,7 +6,7 @@ You can reference my answers for your assignments but don't copy the code litera
 
 ### Week 0 - Scratch
 - Pset 0
-  - [hobbit-hole](https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Scratch")
+  - [Scratch](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%200%20-%20Scratch/Week%200%20Assignment.sb3 "Scratch")
 
 ### Week 1 - C
 - Pset 1
