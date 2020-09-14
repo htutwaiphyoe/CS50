@@ -6,7 +6,7 @@ You can reference my answers for your assignments but don't copy the code litera
 
 ### Week 0 - Scratch
 - Pset 0
-  - [Scratch](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%200%20-%20Scratch/Week%200%20Assignment.sb3 "Scratch")
+  - [Scratch](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%200%20-%20Scratch "Scratch")
 
 ### Week 1 - C
 - Pset 1
