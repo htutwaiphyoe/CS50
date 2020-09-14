@@ -18,8 +18,8 @@ You can reference my answers for your assignments but don't copy the code litera
 
 ### Week 2 - Arrays
 - Pset 2
-  - Readability
-  - Caesar
+  - [Readability](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%202%20-%20Array "Readability")
+  - [Caesar](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%202%20-%20Array "Caesar")
 
 ### Week 3 - Algorithms
 - Pset 3
