@@ -1,6 +1,6 @@
 # CS50
 
-## This is Introduction to Computer Science Course from CS50x
+## Introduction to Computer Science
 
 ### Here is my Journey
 
@@ -65,4 +65,6 @@
 
 - IYO
 
-## Certificate
+### Certificate
+
+![Certificate](Certificate.png)
