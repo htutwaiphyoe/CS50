@@ -58,4 +58,4 @@ You can reference my answers for your assignments but don't copy the code litera
 
 
 ## Certificate
-![Certificate](Certificate/Certificate.png)
+![Certificate](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Certificate/Certificate.png)
