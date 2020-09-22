@@ -1,104 +1,125 @@
-#include <cs50.h>
 #include <stdio.h>
-#include <math.h>
+#include <cs50.h>
+#include <string.h>
 
+int checkSum(int length, long c);
 int main(void)
 {
-    long card_number;
-    int count = 0;
-    int type = 0;
+    // declare program variables
+    long card;
+    string type;
+    int result = 0;
 
-    card_number = get_long("Number: ");
+    // get inputs
+    card = get_long("Numbers: ");
 
-    long card_number_copy = card_number;
-
-    // counts number of digits
-    while (card_number_copy > 0)
-    {
-        count++;
-        card_number_copy /= 10;
-    }
-
-    if (count == 13)
+    // check master
+    if (card >= 1000000000000000)
     {
 
-        if (card_number / 1000000000000 == 4)
+        if (card / 100000000000000 == 51 ||
+            card / 100000000000000 == 52 ||
+            card / 100000000000000 == 53 ||
+            card / 100000000000000 == 54 ||
+            card / 100000000000000 == 55)
+
         {
-            type = 1;
+            type = "MASTERCARD";
+            result = checkSum(16, card);
         }
-    }
 
-    else if (count == 15)
-    {
-        int am15 = card_number / 10000000000000;
-        if (am15 == 34 || am15 == 37)
+        else if (card / 1000000000000000 == 4)
         {
-            type = 2;
+            type = "VISA";
+            result = checkSum(16, card);
         }
     }
 
-    else if (count == 16)
+    // check amex
+    else if (card >= 100000000000000)
     {
-        int mc16 = card_number / 100000000000000;
-        int visa16 = card_number / 1000000000000000;
+        if (card / 10000000000000 == 34 || card / 10000000000000 == 37)
+        {
+            type = "AMEX";
 
-        if (visa16 == 4)
-        {
-            type = 1;
-        }
-        else if (mc16 == 51 || mc16 == 52 || mc16 == 53 || mc16 == 54 || mc16 == 55)
-        {
-            type = 3;
+            result = checkSum(15, card);
         }
     }
 
-    if (type > 0)
+
+    // check visa
+    else if (card >= 1000000000000)
     {
-        int last = 0, secToLast = 0, x;
-
-        while (card_number > 0)
+        if (card / 1000000000000 == 4)
         {
-            last += card_number % 10;
-
-            card_number /= 10;
-
-            x = (card_number % 10) * 2;
-
-            if (x > 9)
-            {
-                int quotient = x / 10;
-                int remainder = x % 10;
-                secToLast += (quotient + remainder);
-            }
-            else
-            {
-                secToLast += x;
-            }
-
-            card_number /= 10;
+            type = "VISA";
+            result = checkSum(13, card);
         }
-        if (((last + secToLast) % 10) == 0)
-        {
-            if (type == 1)
-            {
-                printf("VISA\n");
-            }
-            else if (type == 2)
-            {
-                printf("AMEX\n");
-            }
-            else if (type == 3)
-            {
-                printf("MASTERCARD\n");
-            }
-        }
-        else
-        {
-            printf("INVALID\n");
-        }
+    }
+
+    // check invalid
+    else
+    {
+        type = "INVALID";
+    }
+
+    // check card number is valid
+    if (result == 1)
+    {
+        printf("%s\n", type);
     }
     else
     {
-        printf("INVALID\n");
+        type = "INVALID";
+        printf("%s\n", type);
+    }
+}
+
+int checkSum(int length, long card)
+{
+    // declare program variables
+    long sec_to_last = 0;
+    long last = 0;
+    long divider = 1;
+    int turn = 0;
+
+    // loop for length
+    for (int i = 0; i < length; i++)
+    {
+        long c = card / divider;
+        long remainder = c % 10;
+
+        if (turn == 0)
+        {
+            last += remainder;
+            turn = 1;
+        }
+
+        else if (turn == 1)
+        {
+            remainder = remainder * 2;
+            if (remainder < 10)
+            {
+                sec_to_last += remainder;
+            }
+            else
+            {
+                sec_to_last += remainder / 10;
+                sec_to_last += remainder % 10;
+            }
+
+            turn = 0;
+        }
+        divider *= 10;
+    }
+
+    // check valid checksum
+    if ((sec_to_last + last) % 10 == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
     }
 }
