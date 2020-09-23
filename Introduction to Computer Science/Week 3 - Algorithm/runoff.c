@@ -213,18 +213,27 @@ int find_min(void)
 bool is_tie(int min)
 {
     // TODO
+
+    int valid_candidate = 0;
+    int tied_candidate = 0;
     for (int i = 0; i < candidate_count; i++)
     {
         if (!candidates[i].eliminated)
         {
-            if (candidates[i].votes != min)
+            valid_candidate++;
+            if (candidates[i].votes == min)
             {
-                return false;
+                tied_candidate++;
             }
 
         }
     }
-    return true;
+    if (tied_candidate == valid_candidate)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 // Eliminate the candidate (or candidates) in last place
