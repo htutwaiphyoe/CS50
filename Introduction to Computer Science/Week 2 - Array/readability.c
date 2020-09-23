@@ -1,44 +1,60 @@
-#include <cs50.h>
 #include <stdio.h>
+#include <cs50.h>
 #include <string.h>
-#include <math.h>
 #include <ctype.h>
+#include <stdbool.h>
+#include <math.h>
 
 int main(void)
 {
-    // declare program variables
-    double letters = 0, words = 0, sentences = 0;
+    // get input text
+    string text = get_string("Text: ");
 
-    // get input
-    string inputText = get_string("Text: ");
+    // declare progarm variables
+    int letters = 0;
+    int words = 0;
+    bool counting = true;
+    int sentences = 0;
 
-    //loop for counting letters, words and sentences
-    for (int i = 0, n = strlen(inputText); i < n; i++)
+    // loop for each character in text
+    for (int i = 0, n = strlen(text); i < n; i++)
     {
-        if ((inputText[i] >= 'A' && inputText[i] <= 'Z') || (inputText[i] >= 'a' && inputText[i] <= 'z'))
+        // check for letter
+        if (isalpha(text[i]))
         {
             letters++;
         }
-        else if (inputText[i] == ' ' && ((inputText[i - 1] != '!' && inputText[i - 1] != '.' && inputText[i - 1] != '?')))
+
+        // check for words
+        if (text[i] != 32)
         {
-            words++;
+            if (counting)
+            {
+                words++;
+                counting = false;
+            }
         }
-        else if (inputText[i] == '!' || inputText[i] == '.' || inputText[i] == '?')
+        // if character is space, count again
+        else
         {
-            words++;
+            counting = true;
+        }
+        // check for sentences
+        if (text[i] == 33 || text[i] == 46 || text[i] == 63)
+        {
             sentences++;
         }
     }
 
-    // calcutate average
-    double L = letters * 100 / words;
-    double S = sentences * 100 / words;
+    // calculating average letters per 100 words
+    float L = (float)letters * 100 / (float) words;
+    // calculating average sentences per 100 words
+    float S = (float)sentences * 100 / (float) words;
 
-    // calculate Coleman-Liau index
-    double index = 0.0588 * L - 0.296 * S - 15.8;
+    // Coleman-Liau index
+    int index = round(0.0588 * L - 0.296 * S - 15.8);
 
-
-    // conditional outputs
+    // output grade depend on index
     if (index < 1)
     {
         printf("Before Grade 1\n");
@@ -49,6 +65,7 @@ int main(void)
     }
     else
     {
-        printf("Grade %i\n", (int)round(index));
+        printf("Grade %i\n", index);
     }
+
 }
