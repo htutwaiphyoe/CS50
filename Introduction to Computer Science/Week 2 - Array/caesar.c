@@ -1,82 +1,83 @@
-#include <cs50.h>
 #include <stdio.h>
-#include <math.h>
-#include <ctype.h>
+#include <cs50.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <string.h>
-
 int main(int argc, string argv[])
 {
-    // initialize key
-    int key = 0;
-
-    // if user add key, convert to int
-    if (argc == 2)
-    {
-        key = atoi(argv[1]);
-    }
-
-    // if key is greater than 26, take remainder of dividing by 26
-
-    if (key >= 26)
-    {
-        key %= 26;
-    }
-
-    // if user doesn't add key, show the format
-
-    if (argc != 2 || key <= 0)
+    // if user does not give key, exit the program
+    if (argc != 2)
     {
         printf("Usage: ./caesar key\n");
         return 1;
     }
 
-    // handling non-numberic characters
-    int k = 0, x = strlen(argv[1]);
-    while (k < x)
+    // if key is less than 0, exit the program
+    if (argv[1] < 0)
     {
-        if (isalpha(argv[1][k]))
+        printf("Usage: ./caesar key\n");
+        return 1;
+    }
+
+    // loop for each character in input to check is digt
+    for (int i = 0, n = strlen(argv[1]); i < n; i++)
+    {
+        if (!isdigit(argv[1][i]))
         {
             printf("Usage: ./caesar key\n");
             return 1;
         }
-        k++;
     }
 
-    // get plain text from user
+    // make digit from string
+    int k = atoi(argv[1]);
 
-    string inputText = get_string("plaintext: ");
-
-    // loop for each character
-
-    for (int i = 0, n = strlen(inputText); i < n; i++)
+    // if key is greater than 26, take the remainer
+    if (k >= 26)
     {
-        // for uppercase letters
-        if (inputText[i] >= 65 && inputText[i] <= 90)
-        {
-            if (inputText[i] + key > 90)
-            {
-                inputText[i] -= 26;
-            }
-
-            inputText[i] += key;
-        }
-
-        // for lowercase letters
-        else if (inputText[i] >= 97 && inputText[i] <= 121)
-        {
-            if (inputText[i] + key > 121)
-            {
-                inputText[i] -= 26;
-            }
-
-            inputText[i] += key;
-        }
+        k %= 26;
     }
 
-    // print ciphertext
-    printf("ciphertext: %s\n", inputText);
+    // get plain text
+    string plain = get_string("plaintext: ");
 
-    return 0;
+    // loop for each character of plain text
+    for (int i = 0, n = strlen(plain); i < n; i++)
+    {
+        // if upper, encrypt it
+        if (isupper(plain[i]))
+        {
+
+            plain[i] -= 65;
+            plain[i] += k;
+            if (plain[i] >= 26)
+            {
+                plain[i] %= 26;
+            }
+
+            plain[i] += 65;
+
+        }
+
+        // if lower, encrypt it
+        else if (islower(plain[i]))
+        {
+
+            plain[i] -= 97;
+            plain[i] += k;
+
+            if (plain[i] >= 26)
+            {
+                plain[i] %= 26;
+            }
+
+            plain[i] += 97;
+
+        }
+
+    }
+
+    // print cipher text
+    printf("ciphertext: %s\n", plain);
 
 }
