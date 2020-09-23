@@ -1,66 +1,82 @@
-#include <cs50.h>
 #include <stdio.h>
+#include <cs50.h>
 #include <string.h>
 #include <ctype.h>
-#include <math.h>
-#include <stdlib.h>
 
-// This program hides a message received from the user using an alternative alphabet
-// It takes a 26 digits string of unique letters and reassigns the alphabet using it as a key
 int main(int argc, string argv[])
 {
-    // validates user input, it must exist and be a single string of 26 letters
-    if (argc != 2 || strlen(argv[1]) != 26)
+    // check argument count
+    if (argc != 2)
     {
         printf("Usage: ./substitution key\n");
         return 1;
     }
 
-    char newAlphabet[26];
-    char key[26];
+    int n = strlen(argv[1]);
 
-    // assigns the new values to the array newAlphabet and validates the key
-    for (int i = 0; i < 26; i++)
+    // check key length
+    if (n != 26)
     {
-        key[i] = toupper(argv[1][i]);
-        if (key[i] >= 65 && key[i] <= 90)
+        printf("Key must contain 26 characters.\n");
+        return 1;
+    }
+
+    // declare array for valid key
+    char k[26];
+    // loop for each character of key
+    for (int i = 0; i < n; i++)
+    {
+        // check non-alphabetic character
+        if (!isalpha(argv[1][i]))
         {
-            newAlphabet[i] = 65 + i - key[i];
-        }
-        // Returns an error if the key has non alphabetical characters
-        else
-        {
+
             printf("Usage: ./substitution key\n");
             return 1;
         }
 
-        // This loop checks if the current letter of the key is a duplicate
-        for (int j = 0; j < i; j++)
+        char c = argv[1][i];
+        // check repeated character
+        for (int j = 0; j < n; j++)
         {
-            if (key[i] == key[j])
+            if (i == j)
             {
-                printf("Usage: ./substitution key\n");
+                continue;
+            }
+
+            if (c == argv[1][j])
+            {
+                printf("Key must not contain repeated character\n");
                 return 1;
             }
         }
+        // store in key array
+        k[i] = argv[1][i];
     }
 
-    string text = get_string("plaintext: ");
+    // get plain text
+    string plain = get_string("plaintext: ");
 
-    // converts the message using the new alphabet
-    for (int i = 0, n = strlen(text); i < n; i++)
+    // loop for each character in plaintext
+    for (int i = 0, l = strlen(plain); i < l; i++)
     {
-        if (text[i] >= 65 && text[i] <= 90)
+        // check lower upper
+        if (isupper(plain[i]))
         {
-            text[i] = text[i] - newAlphabet[text[i] - 65];
+            int index = plain[i] - 65;
+
+            plain[i] = toupper(k[index]);
         }
-        else if (text[i] >= 97 && text[i] <= 122)
+        // check for lower
+        if (islower(plain[i]))
         {
-            text[i] = text[i] - newAlphabet[text[i] - 97];
+            int index = plain[i] - 97;
+
+            plain[i] = tolower(k[index]);
         }
+
     }
 
-    // prints out encrypted message
-    printf("ciphertext: %s\n", text);
-    return 0;
+    // print ciphertext
+    printf("ciphertext: %s\n", plain);
+
 }
