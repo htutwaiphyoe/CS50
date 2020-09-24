@@ -15,7 +15,8 @@ typedef struct
 {
     int winner;
     int loser;
-} pair;
+}
+pair;
 
 // Array of candidates
 string candidates[MAX];
@@ -98,8 +99,6 @@ int main(int argc, string argv[])
 // Update ranks given a new vote
 bool vote(int rank, string name, int ranks[])
 {
-    // TODO
-
     for (int i = 0; i < candidate_count; i++)
     {
         if (strcmp(candidates[i], name) == 0)
@@ -108,19 +107,17 @@ bool vote(int rank, string name, int ranks[])
             return true;
         }
     }
-
     return false;
 }
 
 // Update preferences given one voter's ranks
 void record_preferences(int ranks[])
 {
-    // TODO
-    for (int k = 0; k < candidate_count; k++)
+    for (int i = 0; i < candidate_count; i++)
     {
-        for (int l = k + 1; l < candidate_count; l++)
+        for (int j = i + 1; j < candidate_count; j++)
         {
-            preferences[ranks[k]][ranks[l]]++;
+            preferences[ranks[i]][ranks[j]]++;
         }
     }
     return;
@@ -140,13 +137,13 @@ void add_pairs(void)
                 pairs[pair_count].loser = j;
                 pair_count++;
             }
-
             else if (preferences[i][j] < preferences[j][i])
             {
                 pairs[pair_count].winner = j;
                 pairs[pair_count].loser = i;
                 pair_count++;
             }
+
         }
     }
     return;
@@ -156,42 +153,32 @@ void add_pairs(void)
 void sort_pairs(void)
 {
     // TODO
-    // int strength[pair_count][1];
-    // for (int j = 0; j < pair_count; j++)
-    // {
-    //     strength[j][1]
-    // }
     for (int i = 0; i < pair_count; i++)
     {
-        // Iterate over next pairs
         for (int j = 1; j < pair_count - i; j++)
         {
-            // If this pair's winner has less votes than the next one
             if (preferences[pairs[i].winner][pairs[i].loser] < preferences[pairs[j].winner][pairs[j].loser])
             {
-                // Swap the pairs
-                pair temp = pairs[i];
+                pair p = pairs[i];
                 pairs[i] = pairs[j];
-                pairs[j] = temp;
+                pairs[j] = p;
             }
         }
     }
-
     return;
 }
-
-bool check_cycle(int n, int m)
+bool check_cycle(int winner, int loser)
 {
-    if (locked[m][n] == true)
+    if (locked[loser][winner])
     {
         return true;
     }
 
     for (int i = 0; i < candidate_count; i++)
     {
-        if (locked[i][n] == true)
+        if (locked[i][winner] == true)
         {
-            if (check_cycle(i, m))
+            if (check_cycle(i, loser))
             {
                 return true;
             }
@@ -206,11 +193,11 @@ bool check_cycle(int n, int m)
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
+    // TODO
     for (int i = 0; i < pair_count; i++)
     {
         if (!check_cycle(pairs[i].winner, pairs[i].loser))
         {
-            // If no path, lock pair
             locked[pairs[i].winner][pairs[i].loser] = true;
         }
     }
