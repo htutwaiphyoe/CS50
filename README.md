@@ -30,8 +30,8 @@ You can reference my answers for your assignments but don't copy the code litera
 ### Week 3 - Algorithms
 
 - Pset 3
-  - [Plurality](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%203%20-%20Algorithm "Plurality")
-  - [Runoff](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%203%20-%20Algorithm "Runoff")
+  - [Plurality](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%203%20-%20Algorithm/plurality.c "Plurality")
+  - [Runoff](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%203%20-%20Algorithm/runoff.c "Runoff")
   - [Tideman](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%203%20-%20Algorithm/tideman.c "Tideman")
 
 ### Week 4 - Memory
