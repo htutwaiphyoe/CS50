@@ -1,23 +1,19 @@
 #include "helpers.h"
 #include <math.h>
 #include <string.h>
-
-int bound(double n);
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
-    // loop for each pixel
-    for (int i = 0; i < height; i++)
+    for (int h = 0; h < height; h++)
     {
-        for (int j = 0; j < width; j++)
+        for (int w = 0; w < width; w++)
         {
-            // calculate average for to make gray
-            int rgbGray = round((image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed) / 3.000);
+            int gray = round((image[h][w].rgbtBlue + image[h][w].rgbtRed + image[h][w].rgbtGreen) / 3.00);
 
-            // set gray to each pixel
-            image[i][j].rgbtBlue = rgbGray;
-            image[i][j].rgbtGreen = rgbGray;
-            image[i][j].rgbtRed = rgbGray;
+            image[h][w].rgbtBlue = gray;
+            image[h][w].rgbtRed = gray;
+            image[h][w].rgbtGreen = gray;
+
         }
     }
     return;
@@ -26,21 +22,22 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
-    // temporay for swap
-    RGBTRIPLE rgb;
-
-    // loop for each height
-    for (int i = 0; i < height; i++)
+    for (int h = 0; h < height; h++)
     {
-        // loop for each half width
-        for (int j = 0; j < width / 2; j++)
+        for (int w = 0; w < width / 2; w++)
         {
-            // swap pixel
-            rgb = image[i][j];
 
-            image[i][j] = image[i][width - j - 1];
+            int blue = image[h][w].rgbtBlue;
+            int red = image[h][w].rgbtRed;
+            int green = image[h][w].rgbtGreen;
 
-            image[i][width - j - 1] = rgb;
+            image[h][w].rgbtBlue = image[h][width - w - 1].rgbtBlue;
+            image[h][w].rgbtRed = image[h][width - w - 1].rgbtRed;
+            image[h][w].rgbtGreen = image[h][width - w - 1].rgbtGreen;
+
+            image[h][width - w - 1].rgbtBlue = blue;
+            image[h][width - w - 1].rgbtRed = red;
+            image[h][width - w - 1].rgbtGreen = green;
         }
     }
     return;
@@ -49,173 +46,99 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    // temporay rgb
-    RGBTRIPLE temp[height][width];
+    RGBTRIPLE copy[height][width];
 
-    // old version copy
-    memcpy(temp, image, sizeof(RGBTRIPLE) * height * width);
-
-    // loop for each pixel
-    for (int i = 0; i < height; i++)
+    memcpy(copy, image, sizeof(RGBTRIPLE) * height * width);
+    for (int h = 0; h < height; h++)
     {
-
-        for (int j = 0; j < width; j++)
+        for (int w = 0; w < width; w++)
         {
+            int red = 0, green = 0, blue = 0;
             float count = 0.0;
-            int red = 0;
-            int green = 0;
-            int blue = 0;
 
-            for (int k = -1; k <= 1; k++)
+            for (int i = -1; i < 2; i++)
             {
-
-                for (int l = -1; l <= 1; l++)
+                for (int j = -1; j < 2; j++)
                 {
-                    // check for out of border
-                    if (i + k != height && i + k != -1 && j + l != width && j + l != -1)
+                    if (i + h != height && i + h != -1 && w + j != width && w + j != -1)
                     {
-                        red += temp[i + k][j + l].rgbtRed;
-                        green += temp[i + k][j + l].rgbtGreen;
-                        blue += temp[i + k][j + l].rgbtBlue;
+                        red += copy[i + h][w + j].rgbtRed;
+                        blue += copy[i + h][w + j].rgbtBlue;
+                        green += copy[i + h][w + j].rgbtGreen;
                         count++;
                     }
+
                 }
             }
 
-            image[i][j].rgbtRed = round(red / count);
-            image[i][j].rgbtGreen = round(green / count);
-            image[i][j].rgbtBlue = round(blue / count);
+            image[h][w].rgbtRed = round(red / count);
+            image[h][w].rgbtBlue = round(blue / count);
+            image[h][w].rgbtGreen = round(green / count);
+
+
         }
     }
-
     return;
 }
 
 // Detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
-
     RGBTRIPLE copy[height][width];
 
-    for (int i = 0; i < height; i++)
+    memcpy(copy, image, sizeof(RGBTRIPLE) * height * width);
+
+    int Gx[3][3] = { {-1, 0, 1}, {-2, 0, 2}, { -1, 0, 1}};
+    int Gy[3][3] = { {-1, -2, -1}, {0, 0, 0}, {1, 2, 1}};
+    for (int h = 0; h < height; h++)
     {
-        for (int j = 0; j < width; j++)
+        for (int w = 0; w < width; w++)
         {
-            copy[i][j] = image[i][j];
+            int Gxred = 0, Gxgreen = 0, Gxblue = 0, Gyred = 0, Gyblue = 0, Gygreen = 0;
+
+
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    if (i + h != height && i + h != -1 && w + j != width && w + j != -1)
+                    {
+
+                        Gxred += Gx[i + 1][j + 1] * copy[i + h][w + j].rgbtRed;
+                        Gxblue += Gx[i + 1][j + 1] * copy[i + h][w + j].rgbtBlue;
+                        Gxgreen += Gx[i + 1][j + 1] * copy[i + h][w + j].rgbtGreen;
+                        Gyred += Gy[i + 1][j + 1] * copy[i + h][w + j].rgbtRed;
+                        Gyblue += Gy[i + 1][j + 1] * copy[i + h][w + j].rgbtBlue;
+                        Gygreen += Gy[i + 1][j + 1] * copy[i + h][w + j].rgbtGreen;
+
+                    }
+
+                }
+            }
+
+            int red = round(sqrt((pow(Gxred, 2) + pow(Gyred, 2))));
+            int blue = round(sqrt((pow(Gxblue, 2) + pow(Gyblue, 2))));
+            int green = round(sqrt((pow(Gxgreen, 2) + pow(Gygreen, 2))));
+
+            if (red >= 255)
+            {
+                red = 255;
+            }
+            if (blue >= 255)
+            {
+                blue = 255;
+            }
+            if (green >= 255)
+            {
+                green = 255;
+            }
+
+            image[h][w].rgbtRed = red;
+            image[h][w].rgbtBlue = blue;
+            image[h][w].rgbtGreen = green;
+
+
         }
     }
-
-
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
-            float rGx, gGx, bGx, rGy, gGy, bGy;
-            rGx = gGx = bGx = rGy = gGy = bGy = 0;
-
-
-            if (i > 0)
-            {
-                rGy += -2 * copy[i-1][j].rgbtRed;
-                gGy += -2 * copy[i-1][j].rgbtGreen;
-                bGy += -2 * copy[i-1][j].rgbtBlue;
-            }
-
-            if (i < height - 1)
-            {
-
-                rGy += 2 * copy[i+1][j].rgbtRed;
-                gGy += 2 * copy[i+1][j].rgbtGreen;
-                bGy += 2 * copy[i+1][j].rgbtBlue;
-            }
-
-            if (j > 0)
-            {
-                rGx += -2 * copy[i][j-1].rgbtRed;
-                gGx += -2 * copy[i][j-1].rgbtGreen;
-                bGx += -2 * copy[i][j-1].rgbtBlue;
-
-            }
-
-             if (j < width - 1)
-            {
-                rGx += 2 * copy[i][j+1].rgbtRed;
-                gGx += 2 * copy[i][j+1].rgbtGreen;
-                bGx += 2 * copy[i][j+1].rgbtBlue;
-
-            }
-
-            if (i > 0 && j > 0)
-            {
-                // Note: change sign in Gx values here and the result changes side
-                rGx += -1 * copy[i-1][j-1].rgbtRed;
-                gGx += -1 * copy[i-1][j-1].rgbtGreen;
-                bGx += -1 * copy[i-1][j-1].rgbtBlue;
-                rGy += -1 * copy[i-1][j-1].rgbtRed;
-                gGy += -1 * copy[i-1][j-1].rgbtGreen;
-                bGy += -1 * copy[i-1][j-1].rgbtBlue;
-            }
-
-            if (i > 0 && j < width - 1)
-            {
-                rGx += 1 * copy[i-1][j+1].rgbtRed;
-                gGx += 1 * copy[i-1][j+1].rgbtGreen;
-                bGx += 1 * copy[i-1][j+1].rgbtBlue;
-                rGy += -1 * copy[i-1][j+1].rgbtRed;
-                gGy += -1 * copy[i-1][j+1].rgbtGreen;
-                bGy += -1 * copy[i-1][j+1].rgbtBlue;
-            }
-
-            if (i < height - 1  && j < width - 1)
-            {
-                rGx += 1 * copy[i+1][j+1].rgbtRed;
-                gGx += 1 * copy[i+1][j+1].rgbtGreen;
-                bGx += 1 * copy[i+1][j+1].rgbtBlue;
-                rGy += 1 * copy[i+1][j+1].rgbtRed;
-                gGy += 1 * copy[i+1][j+1].rgbtGreen;
-                bGy += 1 * copy[i+1][j+1].rgbtBlue;
-            }
-
-
-            if (i < height - 1  && j > 0)
-            {
-                rGx += -1 * copy[i+1][j-1].rgbtRed;
-                gGx += -1 * copy[i+1][j-1].rgbtGreen;
-                bGx += -1 * copy[i+1][j-1].rgbtBlue;
-                rGy += 1 * copy[i+1][j-1].rgbtRed;
-                gGy += 1 * copy[i+1][j-1].rgbtGreen;
-                bGy += 1 * copy[i+1][j-1].rgbtBlue;
-            }
-
-
-            image[i][j].rgbtRed = (int) bound(sqrt((rGx*rGx)+(rGy*rGy)));
-            image[i][j].rgbtGreen = (int) bound(sqrt((gGx*gGx)+(gGy*gGy)));
-            image[i][j].rgbtBlue = (int) bound(sqrt((bGx*bGx)+(bGy*bGy)));
-        }
-    }
-
-
     return;
-}
-
-
-
-// Function for out of bound
-int bound(double n)
-{
-    int result = 0;
-
-    if (n >= 255)
-    {
-        result = 255;
-    }
-    else if(n < 0)
-    {
-        result = 0;
-    }
-    else
-    {
-        result = (int) round(n);
-    }
-    return (result);
 }
