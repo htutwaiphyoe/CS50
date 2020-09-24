@@ -15,8 +15,7 @@ typedef struct
 {
     int winner;
     int loser;
-}
-pair;
+} pair;
 
 // Array of candidates
 string candidates[MAX];
@@ -86,14 +85,14 @@ int main(int argc, string argv[])
 
         record_preferences(ranks);
 
-        // printf("\n");
+        printf("\n");
     }
 
-    // add_pairs();
-    // sort_pairs();
-    // lock_pairs();
-    // print_winner();
-    // return 0;
+    add_pairs();
+    sort_pairs();
+    lock_pairs();
+    print_winner();
+    return 0;
 }
 
 // Update ranks given a new vote
@@ -110,7 +109,6 @@ bool vote(int rank, string name, int ranks[])
         }
     }
 
-
     return false;
 }
 
@@ -123,9 +121,7 @@ void record_preferences(int ranks[])
         for (int l = k + 1; l < candidate_count; l++)
         {
             preferences[ranks[k]][ranks[l]]++;
-
         }
-
     }
     return;
 }
@@ -151,7 +147,6 @@ void add_pairs(void)
                 pairs[pair_count].loser = i;
                 pair_count++;
             }
-
         }
     }
     return;
@@ -181,7 +176,6 @@ void sort_pairs(void)
             }
         }
     }
-
 
     return;
 }
@@ -219,12 +213,9 @@ void lock_pairs(void)
             // If no path, lock pair
             locked[pairs[i].winner][pairs[i].loser] = true;
         }
-
-
     }
     return;
 }
-
 
 // Print the winner of the election
 void print_winner(void)
