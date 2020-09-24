@@ -32,11 +32,13 @@ You can reference my answers for your assignments but don't copy the code litera
 - Pset 3
   - [Plurality](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%203%20-%20Algorithm "Plurality")
   - [Runoff](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%203%20-%20Algorithm "Runoff")
+  - [Tideman](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%203%20-%20Algorithm/tideman.c "Tideman")
 
 ### Week 4 - Memory
 
 - Pset 4
   - [Filter (less)](<https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/filter(less)> "Filter (less)")
+  - [Filter (More)](<https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/filter(more)> "Filter (More)")
   - [Recover](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/recover "Recover")
 
 ### Week 5 - Data Structures
@@ -48,9 +50,11 @@ You can reference my answers for your assignments but don't copy the code litera
 
 - Pset 6
   - [Hello](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/hello "Hello")
+  - [Mario (less)](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/mario/less/mario.py "Mario (less)")
   - [Mario (more)](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/mario/more "Mario (more)")
   - [Readability](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/readability "Readability")
   - [Cash](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/cash "Cash")
+  - [Credit](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/credit/credit.py "Credit")
   - [DNA](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/dna "DNA")
 
 ### Week 7 - SQL
