@@ -1,82 +1,81 @@
 #include "helpers.h"
 #include <math.h>
 #include <string.h>
-int makeLegit(int color);
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
-    // loop for each pixel
-
-    for (int i = 0; i < height; i++)
+    for (int h = 0; h < height; h++)
     {
-        for (int j = 0; j < width; j++)
+        for (int w = 0; w < width; w++)
         {
-            // get each pixel value
-            int red = image[i][j].rgbtRed;
-            int green = image[i][j].rgbtGreen;
-            int blue = image[i][j].rgbtBlue;
+            int gray = round((image[h][w].rgbtBlue + image[h][w].rgbtGreen + image[h][w].rgbtRed) / 3.00);
+            image[h][w].rgbtBlue = gray;
+            image[h][w].rgbtGreen = gray;
+            image[h][w].rgbtRed = gray;
 
-            // find average for gray
-            int gray = round((red + green + blue) / 3.00);
-
-            // set average to each pixel value
-            image[i][j].rgbtRed = gray;
-            image[i][j].rgbtGreen = gray;
-            image[i][j].rgbtBlue = gray;
         }
     }
     return;
 }
-
 
 // Convert image to sepia
 void sepia(int height, int width, RGBTRIPLE image[height][width])
 {
-    for (int i = 0; i < height; i++)
+    for (int h = 0; h < height; h++)
     {
-        for (int j = 0; j < width; j++)
+        for (int w = 0; w < width; w++)
         {
-            // make sepia color
-            int sepiaRed = makeLegit(round(0.393 * image[i][j].rgbtRed + .769 * image[i][j].rgbtGreen + .189 * image[i][j].rgbtBlue));
-            int sepiaGreen = makeLegit(round(0.349 * image[i][j].rgbtRed + 0.686 * image[i][j].rgbtGreen + 0.168 * image[i][j].rgbtBlue));
-            int sepiaBlue = makeLegit(round(0.272 * image[i][j].rgbtRed + 0.534 * image[i][j].rgbtGreen + 0.131 * image[i][j].rgbtBlue));
+            int blue = image[h][w].rgbtBlue;
+            int green = image[h][w].rgbtGreen;
+            int red = image[h][w].rgbtRed;
 
-            // set sepia color to each pixel
-            image[i][j].rgbtRed = sepiaRed;
-            image[i][j].rgbtGreen = sepiaGreen;
-            image[i][j].rgbtBlue = sepiaBlue;
+            int sepiaRed = round(.393 * red + .769 * green + .189 * blue);
+            int sepiaGreen = round(.349 * red + .686 * green + .168 * blue);
+            int sepiaBlue = round(.272 * red + .534 * green + .131 * blue);
 
+            if (sepiaRed >= 255)
+            {
+                sepiaRed = 255;
+            }
+            if (sepiaGreen >= 255)
+            {
+                sepiaGreen = 255;
+            }
+            if (sepiaBlue >= 255)
+            {
+                sepiaBlue = 255;
+            }
+
+            image[h][w].rgbtRed = sepiaRed;
+            image[h][w].rgbtGreen = sepiaGreen;
+            image[h][w].rgbtBlue = sepiaBlue;
 
         }
     }
+
+
     return;
 }
 
-// decide not to greater than 255
-int makeLegit(int color)
-{
-    if (color > 255)
-    {
-        return 255;
-    }
-    return color;
-}
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
-    // make temporary
-    RGBTRIPLE temp;
-
-    // loop for each pixel
-    for (int i = 0; i < height; i++)
+    for (int h = 0; h < height; h++)
     {
-        // loop for half width
-        for (int j = 0; j < width / 2; j++)
+        for (int w = 0; w < width / 2; w++)
         {
-            // swap pixel
-            temp = image[i][j];
-            image[i][j] = image[i][width - j - 1];
-            image[i][width - j - 1] = temp;
+
+            int blue = image[h][w].rgbtBlue;
+            int green = image[h][w].rgbtGreen;
+            int red = image[h][w].rgbtRed;
+
+            image[h][w].rgbtBlue = image[h][width - w - 1].rgbtBlue;
+            image[h][w].rgbtGreen = image[h][width - w - 1].rgbtGreen;
+            image[h][w].rgbtRed = image[h][width - w - 1].rgbtRed;
+
+            image[h][width - w - 1].rgbtBlue = blue;
+            image[h][width - w - 1].rgbtGreen = green;
+            image[h][width - w - 1].rgbtRed = red;
         }
     }
     return;
@@ -85,44 +84,35 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    // temporary
     RGBTRIPLE temp[height][width];
 
-    // get old version copy
+    // get old version copy not to affect original image
     memcpy(temp, image, sizeof(RGBTRIPLE) * height * width);
-
-    // loop for each pixel
-    for (int i = 0; i < height; i++)
+    for (int h = 0; h < height; h++)
     {
-        for (int j = 0; j < width; j++)
+        for (int w = 0; w < width; w++)
         {
-            // initialize rgb value
-            float count = 0.0;
-            int red = 0;
-            int green = 0;
-            int blue = 0;
+            int blue = 0, red = 0, green = 0;
+            float count = 0;
 
-            // loop for out of border
-            for (int k = -1; k < 2; k++)
+            for (int i = -1; i < 2; i++)
             {
-                for (int l = -1; l < 2; l++)
+                for (int j = -1; j < 2; j++)
                 {
-                    // check for out of border
-                    if (i + k != height && i + k != -1 && j + l != width && j + l != -1)
+                    if (i + h != height && i + h != -1 && j + w != -1 && j + w != width)
                     {
-                        // set rgb value
-                        red += temp[i + k][j + l].rgbtRed;
-                        green += temp[i + k][j + l].rgbtGreen;
-                        blue += temp[i + k][j + l].rgbtBlue;
+                        blue += temp[i + h][j + w].rgbtBlue;
+                        red += temp[i + h][j + w].rgbtRed;
+                        green += temp[i + h][j + w].rgbtGreen;
                         count++;
                     }
                 }
             }
 
-            // set rgb value to current pixel
-            image[i][j].rgbtRed = round(red / count);
-            image[i][j].rgbtGreen = round(green / count);
-            image[i][j].rgbtBlue = round(blue / count);
+            image[h][w].rgbtBlue = round(blue / count);
+            image[h][w].rgbtRed = round(red / count);
+            image[h][w].rgbtGreen = round(green / count);
+
         }
     }
     return;
