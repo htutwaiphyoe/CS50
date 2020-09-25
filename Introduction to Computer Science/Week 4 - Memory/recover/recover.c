@@ -1,80 +1,55 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <cs50.h>
 int main(int argc, char *argv[])
 {
-    // check the file is given
     if (argc != 2)
     {
-        fprintf(stderr, "Usage: ./recover image\n");
+        printf("Usage: ./recover image\n");
         return 1;
     }
 
+    FILE *f = fopen(argv[1], "r");
 
-    FILE *inputFile = fopen(argv[1], "r");
-
-    // check file is null
-    if (inputFile == NULL)
+    if (f == NULL)
     {
-        fprintf(stderr, "Could not open file %s.\n", argv[1]);
+        printf("Can't open file\n");
         return 1;
     }
 
-    // declaring buffer
     unsigned char *buffer = malloc(512);
-
-    // output file
-    FILE *outputFile;
-
-    // each image file name
-    char filename[8];
-
-    // image count
-    int count = 0;
-
-
-    // loop for reading file
-    while (fread(buffer, 512, 1, inputFile))
+    char image_name[8];
+    FILE *image_file;
+    int image_count = 0;
+    bool reading = false;
+    while (fread(buffer, 512, 1, f))
     {
-
-        // check if jpeg
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
-            // check reading
-            if (count > 0)
+            if (image_count > 0)
             {
-                fclose(outputFile);
+                reading = false;
+                fclose(image_file);
             }
+            reading = true;
+            sprintf(image_name, "%03i.jpg", image_count);
+            image_file = fopen(image_name, "w");
 
-            // make image file
-            sprintf(filename, "%03d.jpg", count);
+            fwrite(buffer, 512, 1, image_file);
+            image_count++;
 
-            // open output file
-            outputFile = fopen(filename, "w");
-
-            // write output file
-            fwrite(buffer, 512, 1, outputFile);
-
-            // increment image count
-            count++;
         }
-
         else
         {
-            // reading
-            if (count > 0)
+            if (reading)
             {
-                fwrite(buffer, 512, 1, outputFile);
+                fwrite(buffer, 512, 1, image_file);
             }
         }
     }
 
-    // close files
-    fclose(outputFile);
-    fclose(inputFile);
+    fclose(f);
+    fclose(image_file);
 
-    // clear memory
     free(buffer);
-    return 0;
-
 }
