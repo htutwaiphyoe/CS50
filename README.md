@@ -44,7 +44,7 @@ You can reference my answers for your assignments but don't copy the code litera
 ### Week 5 - Data Structures
 
 - Pset 5
-  - [Speller](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%205%20-%20Data%20Structure/speller "Speller")
+  - [Speller](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%205%20-%20Data%20Structure/speller/dictionary.c "Speller")
 
 ### Week 6 - Python
 
