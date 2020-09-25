@@ -49,13 +49,13 @@ You can reference my answers for your assignments but don't copy the code litera
 ### Week 6 - Python
 
 - Pset 6
-  - [Hello](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/hello "Hello")
+  - [Hello](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/hello/hello.py "Hello")
   - [Mario (less)](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/mario/less/mario.py "Mario (less)")
-  - [Mario (more)](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/mario/more "Mario (more)")
-  - [Readability](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/readability "Readability")
-  - [Cash](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/cash "Cash")
+  - [Mario (more)](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/mario/more/mario.py "Mario (more)")
+  - [Cash](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/cash/cash.py "Cash")
   - [Credit](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/credit/credit.py "Credit")
-  - [DNA](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/dna "DNA")
+  - [Readability](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/readability/readability.py "Readability")
+  - [DNA](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%206%20-%20Python/dna/dna.py "DNA")
 
 ### Week 7 - SQL
 
