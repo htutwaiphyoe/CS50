@@ -37,9 +37,9 @@ You can reference my answers for your assignments but don't copy the code litera
 ### Week 4 - Memory
 
 - Pset 4
-  - [Filter (less)](<https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/filter(less)> "Filter (less)")
-  - [Filter (More)](<https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/filter(more)> "Filter (More)")
-  - [Recover](https://github.com/htutwaiphyoe/CS50/tree/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/recover "Recover")
+  - [Filter (less)](<https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/filter(less)/helpers.c> "Filter (less)")
+  - [Filter (More)](<https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/filter(more)/helpers.c> "Filter (More)")
+  - [Recover](https://github.com/htutwaiphyoe/CS50/blob/master/Introduction%20to%20Computer%20Science/Week%204%20-%20Memory/recover/recover.c "Recover")
 
 ### Week 5 - Data Structures
 
