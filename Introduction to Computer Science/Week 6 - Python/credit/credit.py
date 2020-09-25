@@ -1,74 +1,83 @@
-from cs50 import get_string
-from math import floor
+from cs50 import get_int
 
-AE1 = "34"
-AE2 = "37"
-MC1 = "51"
-MC2 = "52"
-MC3 = "53"
-MC4 = "54"
-MC5 = "55"
-Visa = "4"
-brand = "INVALID"
+import math
 
-# get and clean the input from the user
-card = get_string("Card n*: ")
-card = card.strip()
-count = len(card)
 
-# compare first 2 digits to the saved codes and assign a brand
-if (count == 13):
-    if (card[:1] == Visa):
-        brand = "VISA"
+def main():
+    # get input
+    card = get_int("Number: ")
 
-elif (count == 15):
-    if (card[:2] == AE1 or card[:2] == AE2):
-        brand = "AMEX"
+    result = 0
+    type = ""
 
-elif (count == 16):
-    if (card[:2] == MC1 or card[:2] == MC2 or card[:2] == MC3 or card[:2] == MC4 or card[:2] == MC5):
-        brand = "MASTERCARD"
+    # check master
+    if (card >= 1000000000000000):
+        if math.floor(card / 100000000000000) == 51 or math.floor(card / 100000000000000) == 52 or math.floor(card / 100000000000000) == 53 or math.floor(card / 100000000000000) == 54 or math.floor(card / 100000000000000) == 55:
+            type = "MASTERCARD"
+            result = checkSum(16, card)
 
-    elif (card[:1] == Visa):
-        brand = "VISA"
+        elif (math.floor(card / 1000000000000000) == 4):
+            type = "VISA"
+            result = checkSum(16, card)
 
-# if the number of digits is correct it now checks that luhn's Algorithm is respected, otherwise returns INVALID
-if (brand != "INVALID"):
-    card = int(card)
-    last = 0
-    tempx = 0
-    secToLast = 0
+    # check amex
+    elif (card >= 100000000000000):
 
-    # it picks odd and even numbers starting from the end and sums them
-    while (card > 0):
-        last += card % 10
+        if (math.floor(card / 10000000000000) == 34 or math.floor(card / 10000000000000) == 37):
+            type = "AMEX"
+            result = checkSum(15, card)
 
-        # eliminates last digit so we can access the first even number from the end
-        card /= 10
-        card = floor(card)
+    # check visa
+    elif (card >= 1000000000000):
+        if (math.floor(card / 1000000000000) == 4):
+            type = "VISA"
+            result = checkSum(13, card)
 
-        tempx = (card % 10) * 2
-
-        # if the even number * 2 is 10 or bigger it takes the single digits and adds them the rest of the odds
-        if (tempx >= 10):
-            secToLast += tempx % 10
-            tempx /= 10
-            secToLast += floor(tempx)
-
-        # if the even number * 2 is 9 or less it just adds it to the others
-        else:
-            secToLast += tempx
-
-        card /= 10
-        card = floor(card)
-
-    # if it validates the Algorithm prints the brand
-    if ((last + secToLast) % 10 == 0):
-        print(brand)
-
+    # check invalid
     else:
-        print("INVALID")
+        type = "INVALID"
 
-# again it prints invalid if the digits number was not correct in the first place
-else:
-    print(brand)
+    # check card number is valid
+    if (result == 1):
+        print(type)
+    else:
+        type = "INVALID"
+        print(type)
+
+
+def checkSum(length, card):
+
+    # declare program variables
+    sec_to_last = 0
+    last = 0
+    divider = 1
+    turn = 0
+
+    # loop for length
+    for i in range(length):
+        c = math.floor(card / divider)
+        remainder = c % 10
+
+        if (turn == 0):
+            last += remainder
+            turn = 1
+
+        elif (turn == 1):
+            remainder = remainder * 2
+            if (remainder < 10):
+                sec_to_last += remainder
+            else:
+                sec_to_last += math.floor(remainder / 10)
+                sec_to_last += remainder % 10
+
+            turn = 0
+        divider *= 10
+
+    # check valid checksum
+    if ((sec_to_last + last) % 10 == 0):
+        return 1
+    else:
+        return 0
+
+
+main()
