@@ -1,10 +1,9 @@
 from cs50 import get_int
 
-height = get_int("Height: ")
+h = get_int("Height: ")
 
-while height <= 0 or height > 8:
-    height = get_int("Height: ")
-
-for i in range(1, height + 1):
-    print(" " * (height - i), end="")
-    print("#" * i)
+while h <= 0 or h > 8:
+    h = get_int("Height: ")
+for i in range(h):
+    print(" " * (h - i - 1), end="")
+    print("#" * (i + 1))
